@@ -42,13 +42,14 @@ class HashTable: public Dict<V> {
 			out << "==============" << std::endl << std::endl;
 			for(int i=0; i<th.max; i++){
 				out << " == Cubeta " << i <<" ==" <<std::endl << std::endl;
-				out << "List => ";
+				out << "List => [" <<std::endl << std::endl;
 				if(th.table[i].size() != 0){
 					out << std::endl;
 					for(int j = 0; j < th.table[i].size(); j++){
 						out << "  ('" << th.table[i].get(j).key << "' => " << th.table[i].get(j).value << ")"<< std::endl;
 					}
 				}
+				out << "]" << std::endl << std::endl;
 			}
 			out << "==============" << std::endl;
 			return out;
