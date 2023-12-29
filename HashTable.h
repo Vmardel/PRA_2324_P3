@@ -37,6 +37,7 @@ class HashTable: public Dict<V> {
 			return max;
 		    }
 		    
+		    //operador <<
 		    friend std::ostream& operator<<(std::ostream &out, const HashTable<V> &th){
 		    	out << "HashTable [entries: "<< th.n <<", capacity: " << th.max << "]"<< std::endl;
 			out << "==============" << std::endl << std::endl;
@@ -49,15 +50,34 @@ class HashTable: public Dict<V> {
 						out << "  ('" << th.table[i].get(j).key << "' => " << th.table[i].get(j).value << ")"<< std::endl;
 					}
 				}
-				out << "]" << std::endl << std::endl;
+				out << "]" << std::endl;
 			}
 			out << "==============" << std::endl;
 			return out;
 		    }
 
+		    //operador []
 		    V operator[](std::string key){
 			return search(key);
 		    }
+
+		    V search(std::string key){
+                        for(int i = 0;  i<table[h(key)].size(); i++){
+                                if(table[h(key)].get(i).key == key)
+                                        return table[h(key)].get(i).value;
+                        }
+                        throw std::runtime_error("Key '"+key+"' not found!");
+                    }
+                    V remove(std::string key){
+                            for(int i = 0;  i< table[h(key)].size() ;i++){
+                                    if(table[h(key)].get(i).key == key){
+                                            TableEntry<V> val=table[h(key)].remove(i);
+                                            n--;
+                                            return val.value;
+                                    }
+                            }
+                            throw std::runtime_error("Key '"+key+"' not found!");
+                    }
 
 		    void insert(std::string key, V value){
 			try{	
@@ -78,16 +98,6 @@ class HashTable: public Dict<V> {
 					return table[h(key)].get(i).value;
 			}
 			throw std::runtime_error("Key '"+key+"' not found!");	
-		    }
-		    V remove(std::string key){
-			    for(int i = 0;  i< table[h(key)].size() ;i++){
-				    if(table[h(key)].get(i).key == key){				    
-					    TableEntry<V> val=table[h(key)].remove(i);
-					    n--;
-					    return val.value;
-				    }
-			    }
-			    throw std::runtime_error("Key '"+key+"' not found!");
 		    }
 		    
 		    int entries(){
