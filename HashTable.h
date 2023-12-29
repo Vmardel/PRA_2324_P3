@@ -12,9 +12,12 @@ template <typename V>
 class HashTable: public Dict<V> {
 
 	    private:
+		    //atributos
 		    int n;
 		    int max;
 		    ListLinked<TableEntry<V>>* table;
+
+		    //metodo
 		    int h(std::string key){
                             int acu=0;
                             for(char c : key){
@@ -24,6 +27,7 @@ class HashTable: public Dict<V> {
                     }
        
 	    public:
+		    //metodos
 		    HashTable(int size){
 			n = 0;
 		    	max = size;
