@@ -61,6 +61,7 @@ class HashTable: public Dict<V> {
 			return search(key);
 		    }
 
+		    //funciones eredadas
 		    V search(std::string key){
                         for(int i = 0;  i<table[h(key)].size(); i++){
                                 if(table[h(key)].get(i).key == key)
@@ -90,14 +91,6 @@ class HashTable: public Dict<V> {
 
 			}
 			throw std::runtime_error("key '"+key+"' already exists!");
-		    }
-
-		    V search(std::string key){
-		    	for(int i = 0;  i<table[h(key)].size(); i++){
-				if(table[h(key)].get(i).key == key)
-					return table[h(key)].get(i).value;
-			}
-			throw std::runtime_error("Key '"+key+"' not found!");	
 		    }
 		    
 		    int entries(){
