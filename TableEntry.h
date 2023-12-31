@@ -14,9 +14,9 @@ template <typename V>
 			//metodos
     			TableEntry(std::string key, V value) : key(key), value(value) {}
 
-    			TableEntry(std::string key) : key(key), value() {}
-    			
-			TableEntry() : key(""), value() {}
+                        TableEntry(std::string key) : key(key), value() {}
+
+                        TableEntry() : key(""), value() {}
 
     			//operador == 
     			friend bool operator==(const TableEntry<V> &TE1, const TableEntry<V> &TE2) {
@@ -33,6 +33,16 @@ template <typename V>
         			out << "(" << TE.key << ", " << TE.value << ")";
         			return out;
     			}
+
+			//operador < (parte2)
+			friend bool operator < (const TableEntry<V> &TE1, const TableEntry<V> &TE2) {
+				return TE1.key < TE2.key;
+			}	
+
+			//operador > (parte2)
+			friend bool operator > (const TableEntry<V> &TE1, const TableEntry<V> &TE2) {
+				return TE1.key > TE2.key;
+			}
 	};
 
 #endif
