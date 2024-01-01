@@ -4,6 +4,7 @@
 #include <ostream>
 #include <stdexcept>
 #include "BSNode.h"
+#include "../TableEntry.h"
 
 template <typename T>
 class BSTree {
@@ -13,17 +14,15 @@ class BSTree {
 		BSNode<T> *root;
 
 		//metodos
-		T search(BSNode<T>* n, T e) const{
+		BSNode<T>* search(BSNode<T>* n, T e) const{
 			if(n == nullptr){
 				throw std::runtime_error("Elemento no encontrado");
 			}else if(n->elem < e){
 				return search(n->right, e);
 			}else if(n->elem > e){
 				return search(n->left, e);
-			}else{
-				return n->elem;
 			}
-		
+				return n;
 		}
 
 		BSNode<T>* insert(BSNode<T>* n, T e){
@@ -104,7 +103,8 @@ class BSTree {
 		}
 
 		T search(T e) const{
-			return search(root, e);
+			BSNode<T>* aux = search(root, e);
+			return aux->elem;
 		}
 
 		T operator[](T e) const{
